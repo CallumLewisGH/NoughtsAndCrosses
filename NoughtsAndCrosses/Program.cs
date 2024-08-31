@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 
 //This probably is not following SOLID I hardly understand what it means and i need to familiarise myself with classes more
 
-namespace NoughtsAndCrosses
+
+
+ namespace NoughtsAndCrosses
 {
     internal class Program
     {
@@ -120,10 +122,12 @@ namespace NoughtsAndCrosses
                 Console.WriteLine(playing.printGrid());
                 Console.Write($"You are {playing.turn}s please enter a position: ");
 
-                //
+                //Loops untill it gets an unused position input from the user 
                 while (playing.positionMap[Console.ReadLine().ToUpper()].updateSquare(playing.turn)) ;
+
                 playing.updateTurn(ref playing.turn);
             }
+            //Prints the final board position and displays the winner
             Console.WriteLine(playing.printGrid());
             Console.WriteLine($"{playing.winChecker()}s Won the game!");
 
