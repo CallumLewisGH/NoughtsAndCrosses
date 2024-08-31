@@ -16,7 +16,7 @@ namespace NoughtsAndCrosses
     {
         class Valid
         {
-            public static bool InputXO(out string input)
+            private static bool InputXO(out string input)
             {
                 //Takes user input for turn
                 Console.Write("Enter the character for the first player (O or X): ");
@@ -27,7 +27,7 @@ namespace NoughtsAndCrosses
                 return input == "O" || input == "X";
             }
 
-            public static bool InputPosition(out string input, Dictionary<string, Square> positionMap, string turn)
+            private static bool InputPosition(out string input, Dictionary<string, Square> positionMap, string turn)
             {
                 //Takes user input for position
                 Console.Write($"You are {turn}s please enter a position: ");
@@ -65,7 +65,7 @@ namespace NoughtsAndCrosses
             }
         }
 
-        class Game
+        class Game : Valid
         {
             private Board board; //Initialises a board for the game to take place on
             private string turn; //X or O
