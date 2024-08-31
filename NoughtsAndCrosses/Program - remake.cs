@@ -18,18 +18,22 @@ namespace NoughtsAndCrosses
         {
             public static bool InputXO(out string input)
             {
+                //Takes user input for turn
                 Console.Write("Enter the character for the first player (O or X): ");
                 input = Console.ReadLine().ToUpper();
 
+                //Validates input
                 Console.WriteLine(input == "O" || input == "X" ? $"{input}s has been selected" : "Input has to be a \"X\" or a \"O\"");
                 return input == "O" || input == "X";
             }
 
             public static bool InputPosition(out string input, Dictionary<string, Square> positionMap, string turn)
             {
+                //Takes user input for position
                 Console.Write($"You are {turn}s please enter a position: ");
                 input = Console.ReadLine().ToUpper();
 
+                //Validates input
                 Console.WriteLine(positionMap.ContainsKey(input) ? string.Empty : "Position is invalid");
                 return positionMap.ContainsKey(input);
             }
@@ -63,9 +67,9 @@ namespace NoughtsAndCrosses
 
         class Game
         {
-            private Board board;
-            private string turn;
-            private string position;
+            private Board board; //Initialises a board for the game to take place on
+            private string turn; //X or O
+            private string position; // Position on the board for a piece to go on
             public Game()
             {
                 //Initailises a new instance of board for this particular game
@@ -170,6 +174,7 @@ namespace NoughtsAndCrosses
         {
             Console.Title = "Noughts And Crosses";
 
+            //Creates a new instance of Game and runs the function play
             Game game = new Game();
             game.play();
 
