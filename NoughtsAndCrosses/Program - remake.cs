@@ -8,15 +8,17 @@ using System.Threading.Tasks;
 using System.Xml;
 
 
-//Recreation following solid principles
+//Recreation following solid principles more so than last time but still is probably terrible DIP is non existant and Game not so good on OCP also need to learn interfaces
+//I also feel this is distustingly over commented I guess I will have to learn a balance to commenting
 
 namespace NoughtsAndCrosses
 {
     internal class ProgramCopy
     {
+
         class Valid
         {
-            private static bool InputXO(out string input)
+            public static bool InputXO(out string input)
             {
                 //Takes user input for turn
                 Console.Write("Enter the character for the first player (O or X): ");
@@ -27,7 +29,7 @@ namespace NoughtsAndCrosses
                 return input == "O" || input == "X";
             }
 
-            private static bool InputPosition(out string input, Dictionary<string, Square> positionMap, string turn)
+            public static bool InputPosition(out string input, Dictionary<string, Square> positionMap, string turn)
             {
                 //Takes user input for position
                 Console.Write($"You are {turn}s please enter a position: ");
@@ -52,20 +54,10 @@ namespace NoughtsAndCrosses
                     {"C1", new Square(false, "C1", " ") }, {"C2", new Square(false, "C2", " ") }, {"C3", new Square(false, "C3", " ") }
                 };
             }
-            public string PrintGrid()
-            {
-                //Returns string to print to UI
-                return $"    1   2   3\n" +
-                        $"A | {positionMap["A1"].character_value} | {positionMap["A2"].character_value} | {positionMap["A3"].character_value} |\n" +
-                        $"    -   -   -\n" +
-                        $"B | {positionMap["B1"].character_value} | {positionMap["B2"].character_value} | {positionMap["B3"].character_value} |\n" +
-                        $"    -   -   -\n" +
-                        $"C | {positionMap["C1"].character_value} | {positionMap["C2"].character_value} | {positionMap["C3"].character_value} |\n" +
-                        $"    -   -   -";
-            }
+
         }
 
-        class Game : Valid
+        class Game
         {
             private Board board; //Initialises a board for the game to take place on
             private string turn; //X or O
@@ -85,7 +77,7 @@ namespace NoughtsAndCrosses
                 while (winChecker(board.positionMap)== " ")
                 {
                     //Prints board
-                    Console.WriteLine(board.PrintGrid());
+                    Console.WriteLine(PrintGrid(board.positionMap));
 
                     //Asks user for valid input position
                     while (!(Valid.InputPosition(out position, board.positionMap, turn) && board.positionMap[position].updateSquare(turn)));
@@ -96,7 +88,8 @@ namespace NoughtsAndCrosses
 
                 }
                 //Prints board
-                Console.WriteLine(board.PrintGrid());
+                Console.WriteLine(PrintGrid(board.positionMap));
+
                 //Prints Win message
                 Console.WriteLine($"{turn}s Won the game! Congratulations!");
             }
@@ -131,6 +124,17 @@ namespace NoughtsAndCrosses
                     }
                 }
                 return " ";
+            }
+            public string PrintGrid(Dictionary<string, Square> positionMap)
+            {
+                //Returns string to print to UI
+                return $"    1   2   3\n" +
+                        $"A | {positionMap["A1"].character_value} | {positionMap["A2"].character_value} | {positionMap["A3"].character_value} |\n" +
+                        $"    -   -   -\n" +
+                        $"B | {positionMap["B1"].character_value} | {positionMap["B2"].character_value} | {positionMap["B3"].character_value} |\n" +
+                        $"    -   -   -\n" +
+                        $"C | {positionMap["C1"].character_value} | {positionMap["C2"].character_value} | {positionMap["C3"].character_value} |\n" +
+                        $"    -   -   -";
             }
         }
 
