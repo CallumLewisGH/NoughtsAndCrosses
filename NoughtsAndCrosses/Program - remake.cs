@@ -16,7 +16,9 @@ namespace NoughtsAndCrosses
     internal class ProgramCopy
     {
 
-        class Valid
+        //Interfaces
+
+        class Valid // Maybe this class should be split into input and validator interfaces to be used elsewhere in the code?
         {
             public static bool InputXO(out string input)
             {
@@ -40,7 +42,8 @@ namespace NoughtsAndCrosses
                 return positionMap.ContainsKey(input);
             }
         }
-        class Board
+        class Board //I think I should have made the board as a subclass of an abstract class boards or something similar if i wanted to add different size boards this would allow easy expansion?
+                    //I also think this should have inherited from an interface of the square class?
         {
             //Defines the board as a Dictionary of Squares with the key being their position on the board
             public Dictionary<string, Square> positionMap;
@@ -57,7 +60,8 @@ namespace NoughtsAndCrosses
 
         }
 
-        class Game
+        class Game //This classes dependencys should be abstracted such as valid and board should be made more modular with an interface?
+                   //This class also has a lot of sub functions but is only has one responsibility I don't think it should be split up maybe it is down to personal preference i am not sure?
         {
             private Board board; //Initialises a board for the game to take place on
             private string turn; //X or O
